@@ -43,19 +43,53 @@
       </div>
     </div>
   </BaseHero>
+  <BaseMain>
+    <BaseCard v-for="tutor in tutors" :key="tutor.id">
+      <template v-slot:title
+        ><p class="fw-bolder">{{ tutor.name }}</p></template
+      >
+      <template v-slot:body
+        ><p class="text-gray fw-bold">{{ tutor.rate }}</p></template
+      >
+      <template v-slot:tag>
+        <BaseTag
+          class="tag-margin"
+          v-for="tag in tutor.description"
+          :key="tag"
+          >{{ tag }}</BaseTag
+        >
+      </template>
+      <template v-slot:contact></template>
+      <template v-slot:details> </template>
+    </BaseCard>
+  </BaseMain>
 </template>
 
 <script>
 import BaseHero from "../components/UI/BaseHero.vue";
+import BaseCard from "../components/UI/BaseCard.vue";
+import BaseMain from "../components/UI/BaseMain.vue";
+import BaseTag from "../components/UI/BaseTag.vue";
 
 export default {
   data() {
     return {
       filterCategory: [],
+      tutors: [
+        {
+          id: 1,
+          name: "Nemanja Manojlovic",
+          description: ["Frontend", "Backend"],
+          rate: "40/hour",
+        },
+      ],
     };
   },
   components: {
     BaseHero,
+    BaseCard,
+    BaseMain,
+    BaseTag,
   },
   methods: {
     resetFilters() {
@@ -87,6 +121,10 @@ input[type="checkbox"] {
 
 input[type="checkbox"]:checked {
   background: #0c5dff;
+}
+
+.tag-margin:not(:first-child) {
+  margin-left: 13px;
 }
 </style>
 
@@ -129,5 +167,9 @@ input[type="checkbox"]:checked {
 .btn-primary:active:focus,
 .show > .btn-primary.dropdown-toggle:focus {
   box-shadow: 0 0 0 0.25rem rgba(4, 9, 32, 50%);
+}
+
+.text-gray {
+  color: #7b7b7b;
 }
 </style>
