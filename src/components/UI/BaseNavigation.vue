@@ -29,9 +29,22 @@ nav {
   height: 2rem;
 }
 
+a {
+  text-decoration: none;
+  font-weight: 600;
+  color: #222222;
+}
+
 .router-link-active {
   text-decoration: none;
   font-weight: 600;
   color: #222222;
+  padding-bottom: 2px;
+  border-bottom: 2px solid #222222;
+}
+
+.nav-logo > a.router-link-active {
+  border: none;
+  padding-bottom: 0px;
 }
 </style>
