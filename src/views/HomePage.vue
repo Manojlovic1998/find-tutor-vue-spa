@@ -45,23 +45,24 @@
         </BaseButton>
       </div>
     </BaseHero>
-    <BaseCard v-for="tutor in tutors" :key="tutor.id">
+    <BaseCard v-for="tutor in tutors" :key="tutor.id" class="tutor-card">
       <template v-slot:title
-        ><p class="fw-bolder">{{ tutor.name }}</p></template
+        ><p class="fw-bolder fs-5">{{ tutor.name }}</p></template
       >
       <template v-slot:body
         ><p class="text-gray fw-bold">{{ tutor.rate }}</p></template
       >
       <template v-slot:tag>
-        <BaseTag
-          class="tag-margin"
-          v-for="tag in tutor.description"
-          :key="tag"
-          >{{ tag }}</BaseTag
-        >
+        <BaseTag class="tag-margin" v-for="tag in tutor.tags" :key="tag">{{
+          tag
+        }}</BaseTag>
       </template>
-      <template v-slot:contact></template>
-      <template v-slot:details> </template>
+      <template v-slot:contact>
+        <BaseButton class="card-btn">Contact</BaseButton>
+      </template>
+      <template v-slot:details>
+        <BaseButton class="card-btn">View Details</BaseButton>
+      </template>
     </BaseCard>
   </BaseMain>
 </template>
@@ -81,7 +82,7 @@ export default {
         {
           id: 1,
           name: "Nemanja Manojlovic",
-          description: ["Frontend", "Backend"],
+          tags: ["Frontend", "Backend"],
           rate: "40/hour",
         },
       ],
@@ -129,5 +130,17 @@ input[type="checkbox"]:checked {
 
 .tag-margin:not(:first-child) {
   margin-left: 13px;
+}
+
+.card-btn:not(:first-child) {
+  margin-left: 13px;
+}
+
+.card-btn {
+  margin-top: 13px;
+}
+
+.tutor-card:not(:first-child) {
+  margin-top: 21px;
 }
 </style>
