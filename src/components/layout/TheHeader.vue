@@ -1,13 +1,13 @@
 <template>
   <header class="container">
-    <BaseNavigation></BaseNavigation>
+    <TheNavigation></TheNavigation>
   </header>
 </template>
 
 <script>
-import BaseNavigation from "../UI/BaseNavigation.vue";
+import TheNavigation from "./TheNavigation.vue";
 
 export default {
-  components: { BaseNavigation },
+  components: { TheNavigation },
 };
 </script>
