@@ -10,7 +10,8 @@ const routes = [
   {
     path: "/requests",
     name: "requests",
-    component: () => import("../views/RequestsPage.vue"),
+    component: () =>
+      import(/* webpackChunkName: "request" */ "../views/RequestsPage.vue"),
   },
 ];
 
