@@ -10,7 +10,7 @@
   border-radius: 8px;
   background: #040921;
   border: none;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
 }
 
 .btn-primary:hover {
