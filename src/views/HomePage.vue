@@ -61,7 +61,9 @@
         <BaseButton class="card-btn">Contact</BaseButton>
       </template>
       <template v-slot:details>
-        <BaseButton class="card-btn">View Details</BaseButton>
+        <BaseButton class="card-btn" @click="tutorDetailsRedirect"
+          >View Details</BaseButton
+        >
       </template>
     </BaseCard>
   </BaseMain>
@@ -82,6 +84,7 @@ export default {
         {
           id: 1,
           name: "Nemanja Manojlovic",
+          description: "Junior Full-stack Developer & Designer from Sweden.",
           tags: ["Frontend", "Backend"],
           rate: "40/hour",
         },
@@ -99,6 +102,7 @@ export default {
     resetFilters() {
       this.filterCategory = [];
     },
+    tutorDetailsRedirect() {},
   },
 };
 </script>
