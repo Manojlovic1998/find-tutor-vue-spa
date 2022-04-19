@@ -18,4 +18,8 @@ body,
 html {
   background: #f7f7f7;
 }
+
+.text-gray {
+  color: #7b7b7b;
+}
 </style>
