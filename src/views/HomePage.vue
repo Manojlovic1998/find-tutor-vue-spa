@@ -78,12 +78,15 @@ export default {
 }
 
 input[type="checkbox"] {
-  background: #0c5dff;
   height: 16px;
   width: 16px;
-  border-radius: 2px;
   border: 2px solid rgba(4, 9, 33, 0.32);
   box-sizing: border-box;
+  border-radius: 2px;
+}
+
+input[type="checkbox"]:checked {
+  background: #0c5dff;
 }
 </style>
 
