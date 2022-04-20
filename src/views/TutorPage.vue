@@ -24,10 +24,15 @@
           Junior Full-stack Developer & Designer from Sweden.
         </p>
       </div>
-      <div class="col-12">
-        <BaseButton class="mt-3">Contact</BaseButton>
+      <div class="col-12" v-if="$route.name !== 'contact'">
+        <BaseButton
+          class="mt-3"
+          @click="$router.push({ name: 'contact', params: { id: '1' } })"
+          >Contact</BaseButton
+        >
       </div>
     </BaseHero>
+    <router-view />
   </BaseMain>
 </template>
 

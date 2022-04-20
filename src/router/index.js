@@ -18,6 +18,16 @@ const routes = [
     name: "tutor",
     component: () =>
       import(/* webpackChunkName: "tutor" */ "../views/TutorPage.vue"),
+    children: [
+      {
+        path: "contact",
+        name: "contact",
+        component: () =>
+          import(
+            /* webpackChunkName: "tutor-contact" */ "../views/ContactPage.vue"
+          ),
+      },
+    ],
   },
   {
     path: "/:pathMatched(.*)*",
