@@ -9,9 +9,12 @@
       <ul
         class="nav-links list-unstyled d-flex my-auto ms-auto justify-content-end"
       >
-        <li><router-link to="/">All Tutors</router-link></li>
+        <li><router-link :to="{ name: 'home' }">All Tutors</router-link></li>
         <li class="ms-5">
-          <router-link to="/requests">Requests</router-link>
+          <router-link :to="{ name: 'requests' }">Requests</router-link>
+        </li>
+        <li class="ms-5">
+          <router-link :to="{ name: 'signup' }">SignUp</router-link>
         </li>
       </ul>
     </div>
