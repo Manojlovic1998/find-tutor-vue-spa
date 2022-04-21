@@ -30,6 +30,12 @@ const routes = [
     ],
   },
   {
+    path: "/signup",
+    name: "signup",
+    component: () =>
+      import(/* webpackChunkName: "sign-up" */ "../views/SignUpPage.vue"),
+  },
+  {
     path: "/:pathMatched(.*)*",
     name: "NotFound",
     component: () =>
