@@ -4,7 +4,11 @@ import actions from "./actions";
 
 const auth = {
   state() {
-    return {};
+    return {
+      userId: null,
+      token: null,
+      tokenExpiration: null,
+    };
   },
   mutations: {
     ...mutations,

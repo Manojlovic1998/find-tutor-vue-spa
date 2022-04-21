@@ -79,6 +79,12 @@ export default {
       }
 
       this.formValidStatus = true;
+      if (this.mode === "register") {
+        this.$store.dispatch("signUp", {
+          email: this.email,
+          password: this.password,
+        });
+      }
     },
     switchMode() {
       if (this.mode === "login") {
