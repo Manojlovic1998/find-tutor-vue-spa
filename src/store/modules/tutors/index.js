@@ -2,7 +2,7 @@ import getters from "@/store/getters";
 import actions from "./actions";
 import mutations from "./mutations";
 
-export const tutors = {
+const tutors = {
   state() {
     return {
       tutors: null,
@@ -18,3 +18,5 @@ export const tutors = {
     ...getters,
   },
 };
+
+export default tutors;
