@@ -1,12 +1,18 @@
 import { FIREBASE_REALTIME_DB } from "../../../../api-keys";
 
 export default {
-  async registerTutor({ commit, state, rootGetters }, payload) {
+  async registerTutor({ rootGetters }, payload) {
     // Auth
     let token = rootGetters.token;
     // UserId
     let userId = rootGetters.userId;
-
+    // Tutor Data
+    const tutorData = {
+      name: payload.name,
+      email: payload.email,
+      rate: payload.rate,
+      tags: payload.tags,
+    };
     // res
     let res = await fetch(
       `${FIREBASE_REALTIME_DB}tutors/${userId}.json?auth=${token}`,
