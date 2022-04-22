@@ -118,6 +118,11 @@ export default {
             email: this.email,
             password: this.password,
           });
+        } else {
+          await this.$store.dispatch("signInWithPassword", {
+            email: this.email,
+            password: this.password,
+          });
         }
 
         this.isLoading = false;
