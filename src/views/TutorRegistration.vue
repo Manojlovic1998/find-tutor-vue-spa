@@ -3,8 +3,14 @@
     <BaseHero>
       <div class="col-12 mt-5">
         <h1 class="text-center">Register as a Tutor</h1>
+        <p
+          class="text-danger text-center mt-5"
+          v-if="!formValidStatus && error === 'expertise'"
+        >
+          Please pick at least one area of your expertise.
+        </p>
       </div>
-      <div class="col-8 col-md-5 col-lg-4 mx-auto mt-5">
+      <div class="col-8 col-md-5 col-lg-4 mx-auto">
         <form @submit.prevent="onTutorFormSubmit">
           <div class="form-group">
             <label for="name" class="input-label">Full Name</label>
@@ -110,6 +116,8 @@ export default {
       rate: "",
       description: "",
       tags: [],
+      formValidStatus: true,
+      error: null,
     };
   },
   components: {
@@ -118,7 +126,28 @@ export default {
     BaseButton,
   },
   methods: {
-    onTutorFormSubmit() {},
+    onTutorFormSubmit() {
+      this.formValidStatus = true;
+
+      if (this.tags.length == 0) {
+        this.formValidStatus = false;
+        this.error = "expertise";
+      }
+
+      let newTutor = {
+        name: this.name,
+        email: this.email,
+        rate: this.rate,
+        description: this.description,
+        tags: this.tags,
+      };
+
+      try {
+        this.$store.dispatch("registerTutor", newTutor);
+      } catch (error) {
+        console.log(error);
+      }
+    },
   },
 };
 </script>
