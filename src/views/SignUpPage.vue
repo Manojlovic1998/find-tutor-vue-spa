@@ -44,6 +44,29 @@
         </form>
       </div>
     </BaseHero>
+    <teleport to="body">
+      <BaseModal
+        v-if="isLoading || error"
+        :bodyStyle="'d-flex justify-content-center mt-3'"
+      >
+        <template v-slot:title
+          ><p class="fs-5">
+            {{ isLoading ? "Authenticating..." : "Authentication Failed" }}
+          </p></template
+        >
+        <template v-slot:body>
+          <div class="spinner-border" role="status" v-if="isLoading"></div>
+          <p role="status" v-else>{{ error }}</p>
+        </template>
+        <template v-slot:actions v-if="error">
+          <BaseButton @click="closeModal()">Close</BaseButton>
+        </template>
+      </BaseModal>
+      <BaseOverlay
+        v-if="isLoading || error"
+        @click="closeModal()"
+      ></BaseOverlay>
+    </teleport>
   </BaseMain>
 </template>
 
@@ -51,6 +74,8 @@
 import BaseMain from "../components/UI/BaseMain.vue";
 import BaseHero from "../components/UI/BaseHero.vue";
 import BaseButton from "../components/UI/BaseButton.vue";
+import BaseModal from "../components/UI/BaseModel.vue";
+import BaseOverlay from "../components/UI/BaseOverlay.vue";
 
 export default {
   data() {
@@ -59,16 +84,22 @@ export default {
       password: "",
       formValidStatus: true,
       mode: "login",
+      isLoading: false,
+      error: null,
     };
   },
   components: {
     BaseMain,
     BaseHero,
     BaseButton,
+    BaseModal,
+    BaseOverlay,
   },
   methods: {
-    onSubmit() {
+    async onSubmit() {
       this.formValidStatus = true;
+
+      // Form Validation
       if (
         this.password.length < 6 ||
         !this.email.includes("@") ||
@@ -79,11 +110,20 @@ export default {
       }
 
       this.formValidStatus = true;
-      if (this.mode === "register") {
-        this.$store.dispatch("signUp", {
-          email: this.email,
-          password: this.password,
-        });
+      // Fetch the data
+      this.isLoading = true;
+      try {
+        if (this.mode === "register") {
+          await this.$store.dispatch("signUp", {
+            email: this.email,
+            password: this.password,
+          });
+        }
+
+        this.isLoading = false;
+      } catch (err) {
+        this.isLoading = false;
+        this.error = err.message || "Failed to authenticate, try later.";
       }
     },
     switchMode() {
@@ -93,6 +133,17 @@ export default {
         this.mode = "login";
       }
     },
+    closeModal() {
+      this.isLoading = false;
+      this.error = null;
+    },
   },
 };
 </script>
+
+<style scoped>
+.spinner-border {
+  height: 50px;
+  width: 50px;
+}
+</style>
