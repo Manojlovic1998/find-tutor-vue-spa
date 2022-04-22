@@ -44,6 +44,11 @@
           Refresh
         </BaseButton>
       </div>
+      <div class="col-12 d-flex-inline">
+        <BaseButton @click="$router.push({ name: 'tutorRegistration' })"
+          >Register As a Tutor</BaseButton
+        >
+      </div>
     </BaseHero>
     <BaseCard v-for="tutor in tutors" :key="tutor.id" class="tutor-card">
       <template v-slot:title

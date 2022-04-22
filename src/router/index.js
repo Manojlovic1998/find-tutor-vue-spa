@@ -30,6 +30,14 @@ const routes = [
     ],
   },
   {
+    path: "/tutor/registration",
+    name: "tutorRegistration",
+    component: () =>
+      import(
+        /* webpackChunkName: "registration" */ "../views/TutorRegistration.vue"
+      ),
+  },
+  {
     path: "/signup",
     name: "signup",
     component: () =>
@@ -44,7 +52,7 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory(process.env.BASE_URL),
   routes,
   scrollBehavior(to, from, savedPosition) {
     return (
