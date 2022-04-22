@@ -7,7 +7,14 @@
         </router-link>
       </div>
       <ul
-        class="nav-links list-unstyled d-flex my-auto ms-auto justify-content-end"
+        class="
+          nav-links
+          list-unstyled
+          d-flex
+          my-auto
+          ms-auto
+          justify-content-end
+        "
       >
         <li><router-link :to="{ name: 'home' }">All Tutors</router-link></li>
         <li class="ms-5">
