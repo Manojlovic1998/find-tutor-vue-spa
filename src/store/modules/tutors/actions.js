@@ -32,4 +32,23 @@ export default {
       throw error;
     }
   },
+  async fetchTutors({ commit }) {
+    let res = await fetch(`${FIREBASE_REALTIME_DB}tutors.json`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    let resData = await res.json();
+
+    if (!res.ok) {
+      let error = new Error(
+        resData.message || "Oops, could not connect to server."
+      );
+      throw error;
+    }
+
+    commit("setTutors", resData);
+  },
 };
