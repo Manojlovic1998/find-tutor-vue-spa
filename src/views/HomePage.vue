@@ -50,7 +50,10 @@
         >
       </div>
     </BaseHero>
-    <BaseCard v-for="tutor in tutors" :key="tutor.id" class="tutor-card">
+    <div v-if="error" class="col-12">
+      <p class="text-center fs-5 fw-bold">{{ error }}</p>
+    </div>
+    <BaseCard v-for="(tutor, keyId) in tutors" :key="keyId" class="tutor-card">
       <template v-slot:title
         ><p class="fw-bolder fs-5">{{ tutor.name }}</p></template
       >
@@ -85,15 +88,16 @@ export default {
   data() {
     return {
       filterCategory: [],
-      tutors: [
-        {
-          id: 1,
-          name: "Nemanja Manojlovic",
-          description: "Junior Full-stack Developer & Designer from Sweden.",
-          tags: ["Frontend", "Backend"],
-          rate: "40/hour",
-        },
-      ],
+      error: false,
+      // tutors: [
+      //   {
+      //     id: 1,
+      //     name: "Nemanja Manojlovic",
+      //     description: "Junior Full-stack Developer & Designer from Sweden.",
+      //     tags: ["Frontend", "Backend"],
+      //     rate: "40/hour",
+      //   },
+      // ],
     };
   },
   components: {
@@ -102,6 +106,26 @@ export default {
     BaseMain,
     BaseTag,
     BaseButton,
+  },
+  created() {
+    this.$watch(
+      this.$route.path,
+      () => {
+        try {
+          this.error = false;
+          this.$store.dispatch("fetchTutors");
+        } catch (error) {
+          this.error =
+            error.message || "Oops, failed to connect to the server.";
+        }
+      },
+      { immediate: true }
+    );
+  },
+  computed: {
+    tutors() {
+      return this.$store.getters.getTutorsData;
+    },
   },
   methods: {
     resetFilters() {
