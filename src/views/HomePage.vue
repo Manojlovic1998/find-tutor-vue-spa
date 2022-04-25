@@ -73,7 +73,11 @@
         }}</BaseTag>
       </template>
       <template v-slot:contact>
-        <BaseButton class="card-btn">Contact</BaseButton>
+        <BaseButton
+          class="card-btn"
+          @click="$router.push({ name: 'contact', params: { id: keyId } })"
+          >Contact</BaseButton
+        >
       </template>
       <template v-slot:details>
         <BaseButton class="card-btn" @click="tutorDetailsRedirect(keyId)"

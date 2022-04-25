@@ -2,30 +2,32 @@
   <BaseMain>
     <BaseHero class="tutor-hero">
       <div class="col-12 d-flex align-items-center">
-        <h1 class="d-inline-block">{{tutor.name}}</h1>
+        <h1 class="d-inline-block">{{ tutor.name }}</h1>
       </div>
       <div class="col-12">
         <h2 class="mt-4">Rate</h2>
         <p class="fs-4 text-gray bg-white d-inline-block px-2 py-1 rate">
-          ${{tutor.rate}}/hour
+          ${{ tutor.rate }}/hour
         </p>
       </div>
       <div class="col-12">
         <h2 class="mt-4">Areas of Expertise</h2>
         <div>
-          <BaseTag class="tag" v-for="tag in tutor.tags" :key="tag">{{tag}}</BaseTag>
+          <BaseTag class="tag" v-for="tag in tutor.tags" :key="tag">{{
+            tag
+          }}</BaseTag>
         </div>
       </div>
       <div class="col-12">
         <h2 class="mt-4">Description</h2>
         <p class="fw-bold text-gray">
-          {{tutor.description}}
+          {{ tutor.description }}
         </p>
       </div>
       <div class="col-12" v-if="$route.name !== 'contact'">
         <BaseButton
           class="mt-3"
-          @click="$router.push({ name: 'contact', params: { id: '1' } })"
+          @click="$router.push({ name: 'contact', params: { id: id } })"
           >Contact</BaseButton
         >
       </div>
@@ -41,7 +43,7 @@ import BaseButton from "../components/UI/BaseButton.vue";
 import BaseTag from "../components/UI/BaseTag.vue";
 
 export default {
-  props:["id"],
+  props: ["id"],
   components: {
     BaseMain,
     BaseHero,
@@ -50,10 +52,10 @@ export default {
   },
   computed: {
     tutor() {
-      const tutors = this.$store.getters.getTutorsData
+      const tutors = this.$store.getters.getTutorsData;
       return tutors[this.id];
-    }
-  }
+    },
+  },
 };
 </script>
 
