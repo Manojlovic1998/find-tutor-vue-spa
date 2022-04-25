@@ -24,7 +24,12 @@
           <router-link :to="{ name: 'signup' }">SignUp</router-link>
         </li>
         <li class="ms-5" v-if="isAuthenticated">
-          <router-link :to="{ name: 'signup' }">SignOut</router-link>
+          <button
+            class="btn btn-link p-0 text-decoration-none text-black"
+            @click="signOut"
+          >
+            SignOut
+          </button>
         </li>
       </ul>
     </div>
@@ -33,9 +38,20 @@
 
 <script>
 export default {
+  components: {},
   computed: {
     isAuthenticated() {
       return this.$store.getters.isAuthenticated;
+    },
+  },
+  methods: {
+    signOut() {
+      this.$store.dispatch("signOut", {
+        token: null,
+        userId: null,
+        tokenExpiration: null,
+      });
+      this.$router.push({ name: "home" });
     },
   },
 };
@@ -50,6 +66,11 @@ nav {
 
 .nav-logo {
   height: 2rem;
+}
+
+.btn-link {
+  color: #222222;
+  font-weight: 600;
 }
 
 a {
