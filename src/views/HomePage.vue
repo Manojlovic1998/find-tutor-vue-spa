@@ -69,7 +69,7 @@
         <BaseButton class="card-btn">Contact</BaseButton>
       </template>
       <template v-slot:details>
-        <BaseButton class="card-btn" @click="tutorDetailsRedirect"
+        <BaseButton class="card-btn" @click="tutorDetailsRedirect(keyId)"
           >View Details</BaseButton
         >
       </template>
@@ -89,15 +89,6 @@ export default {
     return {
       filterCategory: [],
       error: false,
-      // tutors: [
-      //   {
-      //     id: 1,
-      //     name: "Nemanja Manojlovic",
-      //     description: "Junior Full-stack Developer & Designer from Sweden.",
-      //     tags: ["Frontend", "Backend"],
-      //     rate: "40/hour",
-      //   },
-      // ],
     };
   },
   components: {
@@ -112,8 +103,10 @@ export default {
       this.$route.path,
       () => {
         try {
-          this.error = false;
-          this.$store.dispatch("fetchTutors");
+          if (this.$store.getters.isTutorsDataEmpty) {
+            this.error = false;
+            this.$store.dispatch("fetchTutors");
+          }
         } catch (error) {
           this.error =
             error.message || "Oops, failed to connect to the server.";
@@ -131,7 +124,12 @@ export default {
     resetFilters() {
       this.filterCategory = [];
     },
-    tutorDetailsRedirect() {},
+    tutorDetailsRedirect(tutorId) {
+      this.$router.push({
+        name: "tutor",
+        params: { id: tutorId },
+      });
+    },
   },
 };
 </script>
