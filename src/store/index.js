@@ -10,11 +10,6 @@ const store = createStore({
     auth,
     tutors,
   },
-  state() {
-    return {
-      tutorsList: [],
-    };
-  },
   getters: {
     ...getters,
   },

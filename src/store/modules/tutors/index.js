@@ -5,7 +5,7 @@ import mutations from "./mutations";
 const tutors = {
   state() {
     return {
-      tutors: null,
+      tutorsList: {},
     };
   },
   actions: {
