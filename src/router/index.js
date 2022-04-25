@@ -16,9 +16,10 @@ const routes = [
   {
     path: "/tutor/:id",
     name: "tutor",
+    props: true,
     component: () =>
       import(/* webpackChunkName: "tutor" */ "../views/TutorPage.vue"),
-    children: [
+      children: [
       {
         path: "contact",
         name: "contact",
