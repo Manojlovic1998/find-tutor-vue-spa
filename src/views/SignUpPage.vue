@@ -126,6 +126,7 @@ export default {
         }
 
         this.isLoading = false;
+        this.$router.replace({ name: "home" });
       } catch (err) {
         this.isLoading = false;
         this.error = err.message || "Failed to authenticate, try later.";
