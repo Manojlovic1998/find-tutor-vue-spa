@@ -52,8 +52,18 @@
       <div class="col-12 d-flex-inline" v-else>
         <p class="fw-bold text-center text-gray">
           If you want to register as a tutor,
-          <router-link :to="{ name: 'signup' }">login</router-link> or
-          <router-link :to="{ name: 'signup' }">register</router-link>.
+          <router-link
+            :to="{ name: 'signup', query: { to: 'tutorRegistration' } }"
+            >login</router-link
+          >
+          or
+          <router-link
+            :to="{
+              name: 'signup',
+              query: { to: 'tutorRegistration', mode: 'register' },
+            }"
+            >register</router-link
+          >.
         </p>
       </div>
     </BaseHero>

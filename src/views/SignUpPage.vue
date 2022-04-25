@@ -83,7 +83,7 @@ export default {
       email: "",
       password: "",
       formValidStatus: true,
-      mode: "login",
+      mode: this.$route.query.mode || "login",
       isLoading: false,
       error: null,
     };
@@ -126,7 +126,7 @@ export default {
         }
 
         this.isLoading = false;
-        this.$router.replace({ name: "home" });
+        this.$router.replace({ name: this.$route.query.to || "home" });
       } catch (err) {
         this.isLoading = false;
         this.error = err.message || "Failed to authenticate, try later.";
