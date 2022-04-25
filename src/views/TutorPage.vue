@@ -2,26 +2,24 @@
   <BaseMain>
     <BaseHero class="tutor-hero">
       <div class="col-12 d-flex align-items-center">
-        <h1 class="d-inline-block">Nemanja Manojlovic</h1>
+        <h1 class="d-inline-block">{{tutor.name}}</h1>
       </div>
       <div class="col-12">
         <h2 class="mt-4">Rate</h2>
         <p class="fs-4 text-gray bg-white d-inline-block px-2 py-1 rate">
-          $40/hour
+          ${{tutor.rate}}/hour
         </p>
       </div>
       <div class="col-12">
         <h2 class="mt-4">Areas of Expertise</h2>
         <div>
-          <BaseTag class="tag">Frontend</BaseTag>
-          <BaseTag class="tag">Backend</BaseTag>
-          <BaseTag class="tag">Career</BaseTag>
+          <BaseTag class="tag" v-for="tag in tutor.tags" :key="tag">{{tag}}</BaseTag>
         </div>
       </div>
       <div class="col-12">
         <h2 class="mt-4">Description</h2>
         <p class="fw-bold text-gray">
-          Junior Full-stack Developer & Designer from Sweden.
+          {{tutor.description}}
         </p>
       </div>
       <div class="col-12" v-if="$route.name !== 'contact'">
@@ -43,12 +41,19 @@ import BaseButton from "../components/UI/BaseButton.vue";
 import BaseTag from "../components/UI/BaseTag.vue";
 
 export default {
+  props:["id"],
   components: {
     BaseMain,
     BaseHero,
     BaseButton,
     BaseTag,
   },
+  computed: {
+    tutor() {
+      const tutors = this.$store.getters.getTutorsData
+      return tutors[this.id];
+    }
+  }
 };
 </script>
 
