@@ -11,6 +11,7 @@ export default {
       name: payload.name,
       email: payload.email,
       rate: payload.rate,
+      description: payload.description,
       tags: payload.tags,
     };
     // res
