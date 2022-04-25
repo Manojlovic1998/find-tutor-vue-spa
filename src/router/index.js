@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomePage from "../views/HomePage.vue";
+import store from "../store/index";
 
 const routes = [
   {
@@ -10,6 +11,9 @@ const routes = [
   {
     path: "/requests",
     name: "requests",
+    meta: {
+      requireAuth: true,
+    },
     component: () =>
       import(/* webpackChunkName: "request" */ "../views/RequestsPage.vue"),
   },
@@ -19,7 +23,7 @@ const routes = [
     props: true,
     component: () =>
       import(/* webpackChunkName: "tutor" */ "../views/TutorPage.vue"),
-      children: [
+    children: [
       {
         path: "contact",
         name: "contact",
@@ -33,6 +37,9 @@ const routes = [
   {
     path: "/tutor/registration",
     name: "tutorRegistration",
+    meta: {
+      requireAuth: true,
+    },
     component: () =>
       import(
         /* webpackChunkName: "registration" */ "../views/TutorRegistration.vue"
@@ -41,6 +48,9 @@ const routes = [
   {
     path: "/signup",
     name: "signup",
+    meta: {
+      requireUnAuth: true,
+    },
     component: () =>
       import(/* webpackChunkName: "sign-up" */ "../views/SignUpPage.vue"),
   },
@@ -65,6 +75,16 @@ const router = createRouter({
       })
     );
   },
+});
+
+router.beforeEach((to, from, next) => {
+  if (to.meta.requireAuth && !store.getters.isAuthenticated) {
+    next({ name: "signup" });
+  } else if (to.meta.requireUnAuth && store.getters.isAuthenticated) {
+    next({ name: "home" });
+  } else {
+    next();
+  }
 });
 
 export default router;
