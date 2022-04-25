@@ -44,10 +44,17 @@
           Refresh
         </BaseButton>
       </div>
-      <div class="col-12 d-flex-inline">
+      <div class="col-12 d-flex-inline" v-if="isAuthenticated">
         <BaseButton @click="$router.push({ name: 'tutorRegistration' })"
           >Register As a Tutor</BaseButton
         >
+      </div>
+      <div class="col-12 d-flex-inline" v-else>
+        <p class="fw-bold text-center text-gray">
+          If you want to register as a tutor,
+          <router-link :to="{ name: 'signup' }">login</router-link> or
+          <router-link :to="{ name: 'signup' }">register</router-link>.
+        </p>
       </div>
     </BaseHero>
     <div v-if="error" class="col-12">
@@ -118,6 +125,9 @@ export default {
   computed: {
     tutors() {
       return this.$store.getters.getTutorsData;
+    },
+    isAuthenticated() {
+      return this.$store.getters.isAuthenticated;
     },
   },
   methods: {
