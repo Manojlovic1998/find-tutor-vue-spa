@@ -59,4 +59,7 @@ export default {
       tokenExpiration: resData.expiresIn,
     });
   },
+  signOut({ commit }, payload) {
+    commit("setUser", payload);
+  },
 };
