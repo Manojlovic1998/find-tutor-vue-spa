@@ -51,7 +51,7 @@ export default {
         userId: null,
         tokenExpiration: null,
       });
-      this.$router.push({ name: "home" });
+      this.$router.replace({ name: "home" });
     },
   },
 };
