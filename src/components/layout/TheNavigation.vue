@@ -17,16 +17,29 @@
         "
       >
         <li><router-link :to="{ name: 'home' }">All Tutors</router-link></li>
-        <li class="ms-5">
+        <li class="ms-5" v-if="isAuthenticated">
           <router-link :to="{ name: 'requests' }">Requests</router-link>
         </li>
-        <li class="ms-5">
+        <li class="ms-5" v-else>
           <router-link :to="{ name: 'signup' }">SignUp</router-link>
+        </li>
+        <li class="ms-5" v-if="isAuthenticated">
+          <router-link :to="{ name: 'signup' }">SignOut</router-link>
         </li>
       </ul>
     </div>
   </nav>
 </template>
+
+<script>
+export default {
+  computed: {
+    isAuthenticated() {
+      return this.$store.getters.isAuthenticated;
+    },
+  },
+};
+</script>
 
 <style scoped>
 nav {
